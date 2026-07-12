@@ -55,4 +55,4 @@ while True:
         trivia_game()
     else:
         print("Thank you for playing! Goodbye!")
-        
+        break
