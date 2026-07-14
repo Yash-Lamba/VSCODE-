@@ -27,21 +27,24 @@ def main():
 3. Delete Tasks
 4. Display Tasks
 5. Exit''')
-    
     while True:
-        choice = int(input("Enter your choice (1-5): "))
-        if choice == 1:
+        choice = input("Enter your choice (1-5): ")
+        if choice == '1':
             print("Add and save tasks")
             add_and_save_tasks()
-        elif choice == 2:
+        elif choice == '2':
             print("Mark tasks as complete")
             mark_tasks_complete()
-        elif choice == 3:
+        elif choice == '3':
             print("Delete tasks")
             delete_tasks()
-        elif choice == 4:
+        elif choice == '4':
             print("Display tasks")
             display_tasks()
-        elif choice == 5:
+        elif choice == '5':
             print("Exiting the To-Do List. Goodbye!")
             break
+        else:
+            print("Invalid choice. Please try again.")
+
+main()
