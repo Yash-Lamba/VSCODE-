@@ -1,8 +1,10 @@
+#imports used
 from asyncio import tasks
 import json
 
 filename = "todo_list.json"
 
+# function for loading tasks on JSON file, if file is not present then it will create a new file and return an empty list of tasks
 def load_tasks():
     try:
         with open(filename , "r") as file:
@@ -10,6 +12,7 @@ def load_tasks():
     except:
         return {"tasks": []}
     
+# function for saving tasks to JSON file   
 def save_tasks(tasks):
     try:
         with open(filename, "w") as file:
@@ -17,6 +20,7 @@ def save_tasks(tasks):
     except:
         print("Error saving tasks to file.")
 
+# function for adding tasks to the list
 def add_tasks(tasks):
     description = input("Enter the task description: ").strip()
     if description:
@@ -26,6 +30,7 @@ def add_tasks(tasks):
     else:
         print("Description not given.") 
 
+# function for displaying tasks in the list
 def display_tasks(tasks):
     task_list = tasks["tasks"]
     if len(task_list) == 0:
@@ -35,7 +40,8 @@ def display_tasks(tasks):
         for idx, task in enumerate(task_list):
             status = "Completed" if task["completed"] else "Incomplete"
             print(f"{idx + 1}. {task['description']} - {status}")
-    
+
+ # function for deleting tasks from the list   
 def delete_tasks(tasks):
     display_tasks(tasks)
     try:
@@ -49,7 +55,7 @@ def delete_tasks(tasks):
     except ValueError:
         print("Please enter a valid task number.")
 
-
+# function for marking tasks as complete
 def mark_tasks_complete(tasks):
     display_tasks(tasks)
     try:
@@ -63,6 +69,7 @@ def mark_tasks_complete(tasks):
     except ValueError:
         print("Please enter a valid task number.")
 
+# main function to run the program
 def main():
     tasks = load_tasks()
 
