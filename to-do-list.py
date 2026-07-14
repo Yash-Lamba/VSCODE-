@@ -26,13 +26,6 @@ def add_tasks(tasks):
     else:
         print("Description not given.") 
 
-def mark_tasks_complete(tasks):
-    
-     
-
-def delete_tasks():
-    pass
-
 def display_tasks(tasks):
     task_list = tasks["tasks"]
     if len(task_list) == 0:
@@ -42,6 +35,33 @@ def display_tasks(tasks):
         for idx, task in enumerate(task_list):
             status = "Completed" if task["completed"] else "Incomplete"
             print(f"{idx + 1}. {task['description']} - {status}")
+    
+def delete_tasks(tasks):
+    display_tasks(tasks)
+    try:
+        task_number = int(input("Enter the task number to delete:"))
+        if 1<= task_number <= len(tasks):
+            del tasks["tasks"][task_number - 1]
+            save_tasks(tasks)
+            print("Task deleted successfully.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid task number.")
+
+
+def mark_tasks_complete(tasks):
+    display_tasks(tasks)
+    try:
+        task_number = int(input("Enter the task number to mark as complete: "))
+        if 1 <= task_number <= len(tasks["tasks"]):
+            tasks["tasks"][task_number - 1]["completed"] = True
+            save_tasks(tasks)
+            print("Task marked as complete.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid task number.")
 
 def main():
     tasks = load_tasks()
@@ -60,10 +80,10 @@ def main():
             add_tasks(tasks)
         elif choice == '2':
             print("Mark tasks as complete")
-            mark_tasks_complete()
+            mark_tasks_complete(tasks)
         elif choice == '3':
             print("Delete tasks")
-            delete_tasks()
+            delete_tasks(tasks)
         elif choice == '4':
             print()
             display_tasks(tasks)
