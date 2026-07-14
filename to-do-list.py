@@ -1,13 +1,22 @@
-# A to do list
-# load existing tasks from a file 
-# check if they are complete or not(mark them as complete or incomplete)
-# add new tasks 
-# delete tasks
+import json
+
+filename = "todo_list.json"
 
 def load_tasks():
-    pass
+    try:
+        with open(filename , "r") as file:
+            return json.load(file)
+    except:
+        return {"tasks": []}
+    
+def save_tasks(tasks):
+    try:
+        with open(filename, "w") as file:
+            json.dump(tasks, file)
+    except:
+        print("Error saving tasks to file.")
 
-def add_and_save_tasks():
+def add_tasks():
     pass
 
 def mark_tasks_complete():
@@ -22,16 +31,17 @@ def display_tasks():
 def main():
     tasks = load_tasks()
     print("Welcome to your To-Do List!")
-    print('''1. Add and save Tasks
+    print('''1. Add tasks
 2. Mark Tasks as Complete
 3. Delete Tasks
 4. Display Tasks
-5. Exit''')
+5. Save tasks
+6. Exit''')
     while True:
-        choice = input("Enter your choice (1-5): ")
+        choice = input("Enter your choice (1-6): ")
         if choice == '1':
-            print("Add and save tasks")
-            add_and_save_tasks()
+            print("Add tasks")
+            add_tasks()
         elif choice == '2':
             print("Mark tasks as complete")
             mark_tasks_complete()
@@ -42,7 +52,10 @@ def main():
             print("Display tasks")
             display_tasks()
         elif choice == '5':
-            print("Exiting the To-Do List. Goodbye!")
+            print("Save tasks")
+            save_tasks(tasks)
+        elif choice == '6':
+            print("Exiting the program. Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
